@@ -1,34 +1,55 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {Link, Redirect  } from 'react-router';
 import {bindActionCreators} from 'redux';
 import * as noteActions from '../actions/noteActions';
 
 class Note extends React.Component {
   constructor(props, context){
     super(props, context);
-    if (props.params 
-      && props.params.noteIndex) {
-      this.noteIndex = props.params.noteIndex;
-      this.title = "Edit Note";
-      this.state = {
-        note: {
-          val: props.notes[this.noteIndex].val
-        }
-      };
-    } else {
-      // new note
-      this.title = 'New Note';
-      this.state = {
-        note: {
-          val: ''
-        }
-      }; 
-    }
+
+    this.state = {
+      note: {
+        id: '',
+        val: ''
+      }
+    };
+    this.title = 'New Note';
 
     this.onNoteChange = this.onNoteChange.bind(this);
     this.onSaved = this.onSaved.bind(this);
-    this.onCreate = this.onCreate.bind(this);
+  }
+
+  componentDidMount() {
+    const {notes, params} = this.props;
+    if (params && params.noteId) {
+      this.noteId = params.noteId;
+      this.title = "Edit Note";
+      
+      if (notes) {
+        this.findNoteUpdateState(notes);
+
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {notes} = this.props;
+    if(notes.length === 0 && nextProps.notes.length > 0) {
+      this.findNoteUpdateState(nextProps.notes);
+    }
+  }
+
+  findNoteUpdateState(notes) {
+    const note = notes.find(note => `${note.id}` === this.noteId)
+    if (note) {
+      this.setState({
+        note: {
+          id: note.id,
+          val: note.val
+        }
+      });
+    }
   }
 
   onNoteChange(event) {
@@ -38,15 +59,12 @@ class Note extends React.Component {
   }
 
   onSaved() {
-    this.props.actions.saveNote(this.state.note, this.noteIndex);
-  }
-
-  onCreate() {
-    this.props.actions.createNote(this.state.note);
+    this.props.actions.saveNote(this.state.note, this.noteId);
+    this.props.history.push('/');  
   }
   
   render() {
-    const clickHandler = this.noteIndex ? this.onSaved : this.onCreate;
+    const clickHandler = this.noteId ? this.onSaved : this.onCreate;
     return (
       <div>
         <h3>{this.title}</h3>
@@ -55,7 +73,7 @@ class Note extends React.Component {
           onChange={this.onNoteChange}/>
         <input type="submit"  
           value="Save"
-          onClick={clickHandler}/>
+          onClick={this.onSaved}/>
         <Link to="/">Cancel</Link>
       </div>
     );

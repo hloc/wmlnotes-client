@@ -8,6 +8,6 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={NoteList}/>
     <Route path="edit-note" component={Note}/>
-    <Route path="/:noteIndex" component={Note}/>
+    <Route path="/:noteId" component={Note}/>
   </Route>
 );

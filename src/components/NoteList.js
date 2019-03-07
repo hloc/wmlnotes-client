@@ -13,7 +13,7 @@ class NoteList extends React.Component {
       <table>
         <tbody>
           {this.props.notes.map((note, index) => 
-            <NoteRow key={index} index={index} note={note.val}/>)
+            <NoteRow key={index} note={note}/>)
           }
         </tbody>
       </table>

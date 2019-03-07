@@ -2,12 +2,11 @@ import React from 'react';
 import {Link} from 'react-router';
 
 const NoteRow = (props) => {
-  const {index, note} = props
+  const note = props.note;
   return (
     <tr>
-      <td>{index}</td>
-      <td>{note}</td>
-      <td><Link to={`/${index}`}>Update</Link></td>
+      <td><Link to={`/${note.id}`}>{note.id}</Link></td>
+      <td>{note.val}</td>
     </tr>
   );
 }
