@@ -3,6 +3,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Router, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
+import './styles/styles.css'; 
 import configureStore from './configureStore';
 import {loadNotes} from './actions/noteActions';
 import routes from './routes';

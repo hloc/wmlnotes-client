@@ -10,7 +10,7 @@ class NoteList extends React.Component {
 
   renderNoteList(){
     return (
-      <table>
+      <table className="table">
         <tbody>
           {this.props.notes.map((note, index) => 
             <NoteRow key={index} note={note}/>)
@@ -23,8 +23,7 @@ class NoteList extends React.Component {
   render() {
     return (
       <div>
-        <h1>Note List here</h1>
-        <Link to="edit-note">Add Note</Link>
+        <Link className="btn btn-primary" to="edit-note">Add Note</Link>
         {this.renderNoteList()}
       </div>
     );

@@ -66,15 +66,18 @@ class Note extends React.Component {
   render() {
     const clickHandler = this.noteId ? this.onSaved : this.onCreate;
     return (
-      <div>
+      <div id="note-edit">
         <h3>{this.title}</h3>
-        <input type="text"
+        <textarea className="form-control" 
           value={this.state.note.val}
           onChange={this.onNoteChange}/>
-        <input type="submit"  
-          value="Save"
-          onClick={this.onSaved}/>
-        <Link to="/">Cancel</Link>
+        <div id="note-controls">
+          <input className="btn btn-primary" 
+            type="submit"  
+            value="Save"
+            onClick={this.onSaved}/>
+          <Link className="btn btn-primary" to="/">Cancel</Link>
+        </div>
       </div>
     );
   }
