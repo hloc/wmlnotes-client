@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect  } from 'react-router';
+import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import * as noteActions from '../actions/noteActions';
 
@@ -41,7 +41,7 @@ class Note extends React.Component {
   }
 
   findNoteUpdateState(notes) {
-    const note = notes.find(note => `${note.id}` === this.noteId)
+    const note = notes.find(note => `${note.id}` === this.noteId);
     if (note) {
       this.setState({
         note: {
@@ -64,7 +64,6 @@ class Note extends React.Component {
   }
   
   render() {
-    const clickHandler = this.noteId ? this.onSaved : this.onCreate;
     return (
       <div id="note-edit">
         <h3>{this.title}</h3>
@@ -84,7 +83,7 @@ class Note extends React.Component {
 }
 
 Note.protoTypes = {
-  note: PropTypes.object.isRequired
+  notes: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {

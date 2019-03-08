@@ -1,5 +1,4 @@
-import * as actionTypes from '../actions/actionTypes'
-import noteApi from '../api/mockNotes';
+import * as actionTypes from '../actions/actionTypes';
 import axios from 'axios';
 
 export function loadNotesSuccess(notes) {
@@ -23,7 +22,7 @@ export function loadNotes() {
         .catch(error => {
           throw(error);
         });
-  }
+  };
 }
 
 export function saveNote(note) {
@@ -40,5 +39,5 @@ export function saveNote(note) {
       .catch(error => {
         throw(error);
       });
-  }
+  };
 }
