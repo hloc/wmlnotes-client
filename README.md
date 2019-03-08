@@ -4,6 +4,7 @@
 npm install
 npm start -s
 ```
-
-## Requirements
-Node - lts/dubnium
+## Run tests
+```
+npm test
+```
